@@ -48,5 +48,7 @@ dependencies {
     // Force activity and fragment versions
     implementation 'androidx.activity:activity-ktx:1.8.0'
     implementation 'androidx.fragment:fragment-ktx:1.6.2'
-}
 
+    // Force androidx.tracing to avoid conflicts
+    implementation 'androidx.tracing:tracing:1.1.0'
+}
