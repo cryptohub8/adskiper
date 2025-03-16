@@ -13,16 +13,13 @@ workflows:
       - name: Refresh Dependencies
         script: |
           cd android
-          chmod +x gradlew
           ./gradlew --refresh-dependencies
       - name: Build APK with Debugging
         script: |
           cd android
-          chmod +x gradlew  # Ensure execution permission
-          ./gradlew clean  # Clean the project
+          ./gradlew clean
           ./gradlew assembleRelease --stacktrace --debug --info --warning-mode all
       - name: Dependency Analysis
         script: |
           cd android
-          chmod +x gradlew
           ./gradlew dependencies
