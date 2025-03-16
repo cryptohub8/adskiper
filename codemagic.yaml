@@ -1,0 +1,22 @@
+workflows:
+  android-app:
+    name: Build Android APK
+    instance_type: mac_mini_m1
+    max_build_duration: 60
+    environment:
+      vars:
+        JAVA_VERSION: 17
+        GRADLE_VERSION: 8.1
+    scripts:
+      - name: Set up Java and Gradle
+        script: |
+          export JAVA_HOME=$(/usr/libexec/java_home -v 17)
+          chmod +x android/gradlew
+          android/gradlew --version
+      - name: Build APK
+        script: |
+          cd android
+          chmod +x gradlew
+          ./gradlew assembleRelease
+    artifacts:
+      - android/app/build/outputs/apk/release/app-release.apk

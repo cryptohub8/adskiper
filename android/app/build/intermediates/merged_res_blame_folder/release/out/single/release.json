@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "C:\\Users\\god\\.gradle\\daemon\\8.12.1\\com.example.myapp-merged_res-4:\\layout_activity_main.xml.flat",
+        "source": "C:\\Users\\god\\.gradle\\daemon\\8.12.1\\com.example.myapp-main-5:\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "com.example.myapp-merged_res-4:/mipmap_adopt.png.flat",
+        "source": "com.example.myapp-main-5:/mipmap/adopt.png"
+    }
+]

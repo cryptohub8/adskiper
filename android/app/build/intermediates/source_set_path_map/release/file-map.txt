@@ -1,0 +1,7 @@
+com.example.myapp-pngs-0 C:\Users\god\Desktop\adskiper\android\app\build\generated\res\pngs\release
+com.example.myapp-resValues-1 C:\Users\god\Desktop\adskiper\android\app\build\generated\res\resValues\release
+com.example.myapp-packageReleaseResources-2 C:\Users\god\Desktop\adskiper\android\app\build\intermediates\incremental\release\packageReleaseResources\merged.dir
+com.example.myapp-packageReleaseResources-3 C:\Users\god\Desktop\adskiper\android\app\build\intermediates\incremental\release\packageReleaseResources\stripped.dir
+com.example.myapp-merged_res-4 C:\Users\god\Desktop\adskiper\android\app\build\intermediates\merged_res\release
+com.example.myapp-main-5 C:\Users\god\Desktop\adskiper\android\app\src\main\res
+com.example.myapp-release-6 C:\Users\god\Desktop\adskiper\android\app\src\release\res
