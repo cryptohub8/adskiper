@@ -9,19 +9,19 @@ workflows:
         JAVA_VERSION: 17
         GRADLE_VERSION: 8.1
     scripts:
-      - name: Install Gradle Wrapper
-        script: |
-          cd android
-          gradle wrapper
       - name: Set up Java and Gradle
         script: |
           export JAVA_HOME=$(/usr/libexec/java_home -v 17)
           cd android && ./gradlew --version
+      - name: Refresh Dependencies
+        script: |
+          cd android
+          ./gradlew --refresh-dependencies
       - name: Build APK
         script: |
           cd android
           chmod +x gradlew
           ./gradlew clean
-          ./gradlew assembleRelease
+          ./gradlew assembleRelease --stacktrace --info
     artifacts:
       - android/app/build/outputs/apk/release/app-release.apk
