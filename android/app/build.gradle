@@ -31,7 +31,13 @@ android {
 
 dependencies {
     implementation 'androidx.appcompat:appcompat:1.6.1'
-    implementation 'com.google.android.material:material:1.11.0' // Updated version
+    implementation 'com.google.android.material:material:1.11.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
-    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0' // Updated version
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.7.0'
+
+    // Fix fragment dependency issue
+    implementation 'androidx.fragment:fragment-ktx:1.6.2'
+
+    // Ensure Core KTX is up-to-date
+    implementation 'androidx.core:core-ktx:1.12.0'
 }
