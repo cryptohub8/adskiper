@@ -12,15 +12,18 @@ workflows:
       - name: Set up Java and Gradle
         script: |
           export JAVA_HOME=$(/usr/libexec/java_home -v 17)
-          cd android && ./gradlew --version
+          cd android
+          chmod +x gradlew  # ✅ Fix permission issue
+          ./gradlew --version
       - name: Refresh Dependencies
         script: |
           cd android
+          chmod +x gradlew  # ✅ Ensure permission before running again
           ./gradlew --refresh-dependencies
       - name: Build APK
         script: |
           cd android
-          chmod +x gradlew
+          chmod +x gradlew  # ✅ Just to be sure
           ./gradlew clean
           ./gradlew assembleRelease --stacktrace --info
     artifacts:
