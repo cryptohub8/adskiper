@@ -1,46 +1,28 @@
 workflows:
-  android-app:
-    name: Build Android APK
-    instance_type: mac_mini_m1
-    max_build_duration: 60
-    environment:
-      java: 17
-      vars:
-        JAVA_VERSION: 17
-        GRADLE_VERSION: 8.1
-    scripts:
-      - name: Set up Java and Gradle
-        script: |
-          export JAVA_HOME=$(/usr/libexec/java_home -v 17)
-          cd android
-          chmod +x gradlew  # ✅ Fix permission issue
-          ./gradlew --version  # Verify Gradle version
-          
-      - name: Clean Gradle Cache
+  version: 2
+  build:
+    name: Build APK with Debugging
+    steps:
+      - name: Checkout repository
+        checkout: self
+      - name: Set Permissions
         script: |
           cd android
-          rm -rf ~/.gradle/caches  # Clear Gradle caches to avoid stale dependencies
-          chmod +x gradlew  # Ensure permissions
-          ./gradlew clean  # Clean the project
-
-      - name: Set Gradle Version
-        script: |
-          cd android
-          ./gradlew wrapper --gradle-version=8.13 --distribution-type=bin  # Ensure correct Gradle wrapper version
-          ./gradlew --version  # Verify the version being used
-
+          chmod +x gradlew
+          chmod -R 755 .gradle
       - name: Refresh Dependencies
         script: |
           cd android
-          chmod +x gradlew  # Ensure permission before running again
-          ./gradlew --refresh-dependencies  # Refresh dependencies to ensure they're up-to-date
-
+          chmod +x gradlew
+          ./gradlew --refresh-dependencies
       - name: Build APK with Debugging
         script: |
           cd android
-          chmod +x gradlew  # Ensure permissions
+          chmod +x gradlew  # Ensure execution permission
           ./gradlew clean  # Clean the project
-          ./gradlew assembleRelease --stacktrace --info --debug --warning-mode all  # Build with debugging and show warnings for deprecated features
-
-    artifacts:
-      - android/app/build/outputs/apk/release/app-release.apk
+          ./gradlew assembleRelease --stacktrace --debug --info --warning-mode all
+      - name: Dependency Analysis
+        script: |
+          cd android
+          chmod +x gradlew
+          ./gradlew dependencies
