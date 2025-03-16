@@ -7,7 +7,7 @@ workflows:
       java: 17
       vars:
         JAVA_VERSION: 17
-        GRADLE_VERSION: 8.13
+        GRADLE_VERSION: 8.1
     scripts:
       - name: Set up Java and Gradle
         script: |
@@ -15,20 +15,32 @@ workflows:
           cd android
           chmod +x gradlew  # ✅ Fix permission issue
           ./gradlew --version  # Verify Gradle version
-      - name: Set Gradle Version to 8.13
+          
+      - name: Clean Gradle Cache
         script: |
           cd android
-          ./gradlew wrapper --gradle-version=8.13 --distribution-type=bin  # Update Gradle wrapper to 8.13
+          rm -rf ~/.gradle/caches  # Clear Gradle caches to avoid stale dependencies
+          chmod +x gradlew  # Ensure permissions
+          ./gradlew clean  # Clean the project
+
+      - name: Set Gradle Version
+        script: |
+          cd android
+          ./gradlew wrapper --gradle-version=8.13 --distribution-type=bin  # Ensure correct Gradle wrapper version
+          ./gradlew --version  # Verify the version being used
+
       - name: Refresh Dependencies
         script: |
           cd android
           chmod +x gradlew  # Ensure permission before running again
-          ./gradlew --refresh-dependencies  # Refresh project dependencies
-      - name: Build APK
+          ./gradlew --refresh-dependencies  # Refresh dependencies to ensure they're up-to-date
+
+      - name: Build APK with Debugging
         script: |
           cd android
-          chmod +x gradlew  # Just to be sure
+          chmod +x gradlew  # Ensure permissions
           ./gradlew clean  # Clean the project
-          ./gradlew assembleRelease --stacktrace --info --warning-mode all  # Build APK and show deprecation warnings
+          ./gradlew assembleRelease --stacktrace --info --debug --warning-mode all  # Build with debugging and show warnings for deprecated features
+
     artifacts:
       - android/app/build/outputs/apk/release/app-release.apk
